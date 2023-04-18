@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Lista de Nomes</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <h1>Lista de Nomes</h1>
+    <ul id="nomes"></ul>
+    <label for="novo-nome">Adicionar novo nome:</label>
+    <input type="text" id="novo-nome" name="novo-nome">
+    <button onclick="adicionar()">Adicionar</button>
+    <br>
+    <label for="posicao">Consultar nome na posição:</label>
+    <input type="number" id="posicao" name="posicao">
+    <button onclick="consultar()">Consultar</button>
+    <h1 id="resultado"></h1>
+    <script>
+      var nomes = [];
+      var listaNomes = document.getElementById("nomes");
+      function atualizarLista() {
+        listaNomes.innerHTML = "";
+        for (var i = 0; i < nomes.length; i++) {
+          var item = document.createElement("li");
+          item.textContent = i + " - " + nomes[i];
+          listaNomes.appendChild(item);
+        }
+      }
+      function adicionar() {
+        var novoNome = document.getElementById("novo-nome").value;
+        nomes.push(novoNome);
+        atualizarLista();
+        document.getElementById("novo-nome").value = "";
+      }
+      function consultar() {
+        var posicao = parseInt(document.getElementById("posicao").value);
+        if (posicao >= 0 && posicao < nomes.length) {
+          document.getElementById("resultado").textContent = nomes[posicao];
+        } else {
+          document.getElementById("resultado").textContent = "Não há nada salvo nessa posição do vetor.";
+        }
+      }
+    </script>
+  </body>
+</html>
